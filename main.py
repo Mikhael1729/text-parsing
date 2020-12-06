@@ -1,55 +1,60 @@
 from representation import Graph
 
 words = [
-  "Para",
-  "De",
-  "Uno",
-  "La",
-  "Es",
-  "Luna",
-  "Sol",
-  "Carro",
-  "Hola",
-  "Arbol",
-  "Silla",
-  "Mesa",
-  "Casa",
-  "Año",
-  "Rio",
-  "Mesa",
-  "Perro",
-  "Calle",
-  "Feliz",
-  "Son"
+  "para",
+  "de",
+  "uno",
+  "la",
+  "es",
+  "luna",
+  "sol",
+  "carro",
+  "hola",
+  "arbol",
+  "silla",
+  "mesa",
+  "casa",
+  "año",
+  "rio",
+  "mesa",
+  "perro",
+  "calle",
+  "feliz",
+  "son"
 ]
 
-def connect(word, graph):
+# S = Graph()
+# s1 = S.add_node("p")
+# s2 = S.add_node("pa")
+# s3 = S.add_node("par")
+# s4 = S.add_node("para")
+
+# S.add_edge(s1.id, s2.id, "a")
+# S.add_edge(s2.id, s3.id, "r")
+# S.add_edge(s3.id, s4.id, "a")
+
+def connect2(word, graph):
+  nodes = []
   concatenation = ""
-  for i in range(0, len(word) - 1): # para
-    letter = word[i]
-    next_letter = word[i + 1]
-
+  
+  # Add nodes
+  for letter in word:
     concatenation += letter
+    nodes.append(graph.add_node(concatenation))
 
-    n1 = graph.add_node(concatenation) # p
+  # Add edges
+  for i in range(1, len(word)):
+    letter = word[i]
+    graph.add_edge(nodes[i - 1].id, nodes[i].id, letter)
 
-    concatenation += next_letter
-
-    n2 = graph.add_node(concatenation)
-
-    if i > 0:
-      graph.add_edge(n1.id, n2.id, letter)
-
-def generate_states_space():
+def generate_states_space2():
   S = Graph()
 
   for word in words:
-    connect(word, S)
+    connect2(word, S)
 
   return S
 
-states_space = generate_states_space()
-
-for key, value in states_space.nodes.items():
+generated = generate_states_space2()
+for key, value in generated.nodes.items():
   print(value)
-
