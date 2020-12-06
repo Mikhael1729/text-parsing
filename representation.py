@@ -1,6 +1,7 @@
 import pprint
 from collections import defaultdict
 
+# A -> B
 class Node:
   """
   id: Unique value to identify the node
@@ -38,7 +39,10 @@ class Graph:
 
   def add_node(self, value):
     new_id = self.__generate_next_node_id()
-    self.nodes[new_id] = Node(id, value=value)
+    new_node = Node(new_id, value=value)
+    self.nodes[new_id] = new_node
+
+    return new_node
 
   def __generate_next_node_id(self):
     new_id = len(self.nodes)
@@ -48,8 +52,8 @@ class Graph:
     edge = Edge(
       id = self.__generate_next_edge_id(),
       value = value,
-      source = source_id,
-      destination = destination_id
+      source = self.get_node(source_id),
+      destination = self.get_node(destination_id)
     )
 
     self.edges.append(edge)
@@ -60,7 +64,7 @@ class Graph:
       self.nodes[destination_id].adjacents.append(edge)
 
   def __generate_next_edge_id(self):
-    last_edge = self.edges[-1]
+    last_edge = self.edges[-1] if self.edges else None
     return last_edge.id + 1 if last_edge else 0
 
   def get_node(self, id):
