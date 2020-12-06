@@ -23,9 +23,9 @@ Words to detec
 1. Rio
 1. Mesa
 1. Perro
-1. Calle
-1. Feliz
-1. Son
+1. Tratado
+1. Felicidad
+1. Sonido
 
 ## Thinking
 
@@ -35,8 +35,5 @@ Words to detec
 ## References
 
 Diagrams [are here](https://drive.google.com/file/d/1XSL771Ry4Ifq2sFQZaJUhJRlMyg_Q_G-/view?usp=sharing)
-
-
-
 
 
