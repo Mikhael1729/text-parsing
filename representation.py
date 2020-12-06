@@ -1,13 +1,31 @@
 import pprint
 from collections import defaultdict
+from difflib import SequenceMatcher
 
-# A -> B
+KEY_WORDS = [
+  "Para",
+  "De",
+  "Uno",
+  "La",
+  "Es",
+  "Luna",
+  "Sol",
+  "Carro",
+  "Hola",
+  "Arbol",
+  "Silla",
+  "Mesa",
+  "Casa",
+  "Año",
+  "Rio",
+  "Mesa",
+  "Perro",
+  "Calle",
+  "Feliz",
+  "Son"
+]
+
 class Node:
-  """
-  id: Unique value to identify the node
-  value: the letter o word
-  adjacents: linked list of edges
-  """
   def __init__(self, id, value=None, adjacents=[]):
     self.id = id
     self.value = value 
@@ -75,3 +93,11 @@ class Graph:
       print("NODE DOESN'T EXISTS")
       return None
 
+def heuristic(n):
+  min_distance = 1
+  for word in KEY_WORDS:
+    s = SequenceMatcher(None, word, n.value)
+    v = s.ratio() *(-1)
+    min_distance = min(min_distance, v)
+  
+  return min_distance
